@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 /**
  * Hello world!
  * To export the runnable program Right click on the project ,click on export . From the java option choose "Runnable jar file" then next screen choose the second option "package required libraries into generated jar"
@@ -17,16 +19,21 @@ public class App
     public static void main( String[] args ) throws InterruptedException
     {
         System.out.println( "Hello World!" );
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\arup.ghosh\\Desktop\\TCS\\Study\\devops\\chromedriver-win64\\chromedriver.exe");
+        //For running in browser mode below driver need to setup in the local system
+        //System.setProperty("webdriver.chrome.driver","C:\\Users\\arup.ghosh\\Desktop\\TCS\\Study\\devops\\chromedriver-win64\\chromedriver.exe");
+        
+        //For make it independent of chrome driver ,we need to use the pom.xml dependency of chrome webdrivermanager. below property need to add
+        WebDriverManager.chromedriver().setup();
         
         ChromeOptions chromeOptions = new ChromeOptions();
         
         //For making the test without openning the browser in the front end headless properties need to add
+        
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
         
         // open browser and access to get the application url
-        driver.get("http://34.239.141.49:8080/AddressBookDeploy/");
+        driver.get("http://3.92.128.136:8080/AddressBookDeploy/");
         
         //enable wait of 2 seconds
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
